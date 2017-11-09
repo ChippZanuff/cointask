@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'bitcoin_exchange_rate_provider_name' => env('BITCOIN_EXCHANGE_RATE_PROVIDER_NAME'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -176,6 +178,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\BitcoinExchangeRateProvider::class,
 
     ],
 
