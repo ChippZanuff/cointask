@@ -7,19 +7,18 @@ use GuzzleHttp\Client;
 
 class CoindeskRepository implements BitcoinRepositoryInterface
 {
-    private $guzzle, $path;
+    private $guzzle;
 
-    public function __construct(Client $guzzle, $path = 'https://api.coindesk.com/v1/bpi/currentprice.json')
+    public function __construct(Client $guzzle)
     {
         $this->guzzle = $guzzle;
-        $this->path = $path;
     }
 
     public function getExchangeRates()
     {
         $resource = \GuzzleHttp\json_decode($this->guzzle->request(
             'GET',
-            $this->path,
+            'https://api.coindesk.com/v1/bpi/currentprice.json',
             [
                 'headers' =>
                     [
@@ -27,9 +26,9 @@ class CoindeskRepository implements BitcoinRepositoryInterface
                         'Content-type' => 'application/json'
                     ]
             ]
-            )->getBody()->getContents(), true);
+        )->getBody()->getContents(), true);
 
-        return array_values(array_map(function($rawBitcoinExhangeRate) {
+        return array_values(array_map(function ($rawBitcoinExhangeRate) {
             return new BitcoinExchangeRate(array_get($rawBitcoinExhangeRate, 'code'), array_get($rawBitcoinExhangeRate, 'rate_float'));
         }, $resource['bpi']));
     }
