@@ -28,14 +28,13 @@ class BitcoinExchangeRateProvider extends ServiceProvider
      */
     public function register()
     {
-        if(\config('app.bitcoin_exchange_rate_provider_name') == 'blockchain'){
-            $this->app->bind(BitcoinRepositoryInterface::class, function() {
-                return $this->app->make(BlockchainRepository::class);
-            });
-        }
-        if(\config('app.bitcoin_exchange_rate_provider_name') == 'coindesk'){
-            $this->app->bind(BitcoinRepositoryInterface::class, function() {
+        if (\config('app.bitcoin_exchange_rate_provider_name') == 'coindesk')  {
+            $this->app->bind(BitcoinRepositoryInterface::class, function () {
                 return app(CoindeskRepository::class);
+            });
+        } else{
+            $this->app->bind(BitcoinRepositoryInterface::class, function () {
+                return $this->app->make(BlockchainRepository::class);
             });
         }
     }

@@ -15,7 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    'bitcoin_exchange_rate_provider_name' => env('BITCOIN_EXCHANGE_RATE_PROVIDER_NAME'),
+    'bitcoin_exchange_rate_provider_name' => env('BITCOIN_EXCHANGE_RATE_PROVIDER_NAME', 'blockchain'),
 
     /*
     |--------------------------------------------------------------------------
