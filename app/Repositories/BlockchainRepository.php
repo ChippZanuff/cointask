@@ -31,9 +31,35 @@ class BlockchainRepository implements BitcoinRepositoryInterface
         $currencies = [];
         foreach ($resource as $currency => $rawBitcoinExhangeRate)
         {
-            $currencies[] = new BitcoinExchangeRate($currency, array_get($rawBitcoinExhangeRate, 'buy'));
+            if($this->isUsd($currency))
+            {
+                $currencies[] = new BitcoinExchangeRate($currency, $rawBitcoinExhangeRate['buy']);
+            }
+            if($this->isGbp($currency))
+            {
+                $currencies[] = new BitcoinExchangeRate($currency, $rawBitcoinExhangeRate['buy']);
+            }
+            if($this->isEur($currency))
+            {
+                $currencies[] = new BitcoinExchangeRate($currency, $rawBitcoinExhangeRate['buy']);
+            }
         }
 
         return $currencies;
+    }
+
+    public function isGbp($currency)
+    {
+        return $currency == 'GBP';
+    }
+
+    public function isUsd($currency)
+    {
+        return $currency == 'USD';
+    }
+
+    public function isEur($currency)
+    {
+        return $currency == 'EUR';
     }
 }

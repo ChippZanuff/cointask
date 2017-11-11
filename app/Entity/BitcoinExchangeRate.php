@@ -15,6 +15,22 @@ class BitcoinExchangeRate
 
     public function toArray()
     {
-        return [$this->currency => $this->exchangeRate];
+        return ['currency' => $this->currency, 'exchange_rate' => $this->exchangeRate];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExchangeRate()
+    {
+        return $this->exchangeRate;
     }
 }

@@ -30,8 +30,7 @@ class BitcoinExchangeRateProvider extends ServiceProvider
     {
         if(\config('app.bitcoin_exchange_rate_provider_name') == 'blockchain'){
             $this->app->bind(BitcoinRepositoryInterface::class, function() {
-                return new BlockchainRepository(new Client());
-                //return $this->app->make(BlockchainRepository::class);
+                return $this->app->make(BlockchainRepository::class);
             });
         }
         if(\config('app.bitcoin_exchange_rate_provider_name') == 'coindesk'){
